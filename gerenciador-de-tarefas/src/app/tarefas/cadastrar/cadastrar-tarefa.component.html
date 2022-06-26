@@ -1,0 +1,45 @@
+<h1>Cadastrar tarefa</h1>
+
+<div class="well">
+  <form #formTarefa = "ngForm"> <!--Trazendo o nome do formulario para implementar no html-->
+    <div class="form-group">
+      <label for="nome">Tarefa:</label>
+      <input 
+        type="text"
+        class="form-control"
+        id="nome"
+        name="nome"
+        [(ngModel)] = "tarefa.nome"
+        #nome = "ngModel"
+        minlength="5" 
+        required> <!--[(ngModel)] componente que deixa em sincronia o tarefa.nome e o ngModel -->
+                  <!--#nome variavel local = mostrando a referencia ao ngModel - e ela vai mostrar possiveis erros-->
+      <div *ngIf="nome.errors && (nome.dirty || nome.touched)" class="alert alert-danger">
+        <!--essa div de cima seria para uma alerta de erro-->
+        <!--Para cada erro que e cometido, o .errors retorna um minlength ou required-->
+        <div [hidden]="!nome.errors.required">
+          <!--o operador [hidden] e usado para definir se a div vai aparecer ou não-->
+          <!--Se na houver erro no required, essa div nao apacere-->
+          Digite a tarefa.
+        </div>
+        <div [hidden]="!nome.errors.minlength">
+          <!--A mesma coisa do required-->
+          A tarefa deve conter ao menos 5 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <input 
+        type="submit"
+        class="btn btn-success"
+        (click)= "cadastrar()"
+        value="Cadastrar"
+        [disabled] = "!formTarefa.form.valid"><!--Deixa o botão cadastrar desativado ate que o formulario fique valido-->
+      <a [routerLink] = "['/tarefas']"
+        class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left" 
+          aria-hidden="true"></span> Voltar
+      </a>
+    </div>
+  </form>
+</div>

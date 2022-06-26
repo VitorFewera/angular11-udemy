@@ -1,0 +1,113 @@
+<div>
+    <h2>Jogo da velha</h2>
+    
+    <!-- tela inicial -->
+    <div class="principal" *ngIf="showInicio"><!--Inicializa o showInicio, caso ele seja true -->
+      <a href="#" 
+         class="botao"
+        (click)="iniciarJogo()">
+         Iniciar
+      </a>
+    </div><!-- fim tela inicial -->
+  
+    <!-- tabuleiro -->
+    <div *ngIf="showTabuleiro" >
+      <ul>
+        <!--Nessa parte coloco as 4 codições para cada posição do jogo, 
+        Quando clicado nas casas
+        1 - Se deve exibir X
+        2 - Se deve exibir O
+        3 - Se deve exibir Vitoria 
+        4 - Se o CPU deve jogar-->
+        <li class="kz-border-bottom kz-border-right"
+          [class.kz-img-x]="exibirX(0, 0)"
+          [class.kz-img-o]="exibirO(0, 0)"
+          [class.kz-cor-vitoria]="exibirVitoria(0, 0)"
+          (click)="jogar(0,0)">
+          <!--[class.MmMmMm] = operador class, serve como uma marcação, caso a condição imposta for satisfatoria
+          Exibir o que o operador esta marcando-->
+        </li>
+        
+        <!--Mesma coisa que de cima, so que com um codigo diferente e menor
+            [ngClass]="{''}" Um perador que tem a mesma logica que o de cima-->
+        <li class="kz-border-bottom kz-border-right"
+          [ngClass]= "{
+            'kz-img-x': exibirX(0, 1),
+            'kz-img-o': exibirO(0, 1),
+            'kz-cor-vitoria': exibirVitoria(0, 1)}"
+          (click)="jogar(0, 1)">
+        </li>
+        
+        <li class="kz-border-bottom"
+          [ngClass]= "{
+            'kz-img-x': exibirX(0, 2),
+            'kz-img-o': exibirO(0, 2),
+            'kz-cor-vitoria': exibirVitoria(0, 2)}"
+          (click)="jogar(0, 2)">
+        </li>
+        
+        <li class="kz-border-bottom kz-border-right"
+          [ngClass]= "{
+            'kz-img-x': exibirX(1, 0),
+            'kz-img-o': exibirO(1, 0),
+            'kz-cor-vitoria': exibirVitoria(1, 0)}"
+          (click)="jogar(1, 0)">
+        </li>
+        
+        <li class="kz-border-bottom kz-border-right"
+          [ngClass]= "{
+            'kz-img-x': exibirX(1, 1),
+            'kz-img-o': exibirO(1, 1),
+            'kz-cor-vitoria': exibirVitoria(1, 1)}"
+          (click)="jogar(1, 1)">
+        </li>
+        
+        <li class="kz-border-bottom"
+          [ngClass]= "{'kz-img-x': exibirX(1, 2),
+            'kz-img-o': exibirO(1, 2),
+            'kz-cor-vitoria': exibirVitoria(1, 2)}"
+          (click)="jogar(1, 2)"></li>
+        
+        <li class="kz-border-right"
+          [ngClass]= "{
+            'kz-img-x': exibirX(2, 0),
+            'kz-img-o': exibirO(2, 0),
+            'kz-cor-vitoria': exibirVitoria(2, 0)}"
+          (click)="jogar(2, 0)"></li>
+        
+        <li class="kz-border-right"
+          [ngClass]= "{
+            'kz-img-x': exibirX(2, 1),
+            'kz-img-o': exibirO(2, 1),
+            'kz-cor-vitoria': exibirVitoria(2, 1)}"
+          (click)="jogar(2, 1)"></li>
+        
+        <li [ngClass]= "{
+              'kz-img-x': exibirX(2, 2),
+              'kz-img-o': exibirO(2, 2),
+              'kz-cor-vitoria': exibirVitoria(2, 2)}"
+            (click)="jogar(2, 2)">
+        </li>
+      </ul>
+    </div><!-- fim tabuleiro --> 
+  
+    <!-- tela final -->
+    <div *ngIf="showFinal">
+      <span>
+        <!--Jogador == 2 - se refere ao cliente
+            Jogador == 1 - se refere a CPU
+            jogador == 0 - Não é nenhum dos dois-->
+      <p *ngIf="jogador==2">Você venceu!!!</p>
+      <p *ngIf="jogador==1">Você perdeu...</p>
+      <p *ngIf="jogador==0">O jogo terminou empatado...</p>
+      <br />
+      <a href="#" 
+           class="botao"
+           (click)="novoJogo()">
+           Jogar novamente
+        </a>
+      </span>
+    </div><!-- fim tela final -->
+  
+  </div>
+  
